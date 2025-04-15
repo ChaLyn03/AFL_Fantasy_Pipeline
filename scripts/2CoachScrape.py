@@ -1,5 +1,12 @@
 import requests
 import json
+import os
+
+DEBUG = os.getenv("DEBUG", "0") == "1"
+
+def debug_print(*args):
+    if DEBUG:
+        print("DEBUG:", *args)
 
 # === CONFIG ===
 DATA_URL = "https://fantasy.afl.com.au/data/afl/coach/players.json"

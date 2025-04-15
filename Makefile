@@ -76,3 +76,16 @@ venv:
 test:
 	@echo "🧪 Running tests with pytest..."
 	pytest tests/
+	
+.PHONY: e2e-test
+
+e2e-test:
+	pytest tests/test_e2e.py -s
+
+
+# --- DEBUGGING ---
+
+.PHONY: derive-debug
+derive-debug:
+	DEBUG=1 python scripts/7StatDerivatives.py
+

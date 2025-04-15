@@ -1,5 +1,12 @@
 import requests
 import json
+import os
+
+DEBUG = os.getenv("DEBUG", "0") == "1"
+
+def debug_print(*args):
+    if DEBUG:
+        print("DEBUG:", *args)
 
 # === CONFIG ===
 DATA_URL = "https://fantasy.afl.com.au/data/afl/players.json"
@@ -16,6 +23,6 @@ try:
     data = response.json()
     with open("data/raw/3Player.json", "w") as f:
         json.dump(data, f, indent=2)
-    print(f"✅ Player data saved to {OUTPUT_FILE}")
+    debug_print(f"✅ Player data saved to {OUTPUT_FILE}")
 except Exception as e:
-    print(f"❌ Failed to fetch player data: {e}")
+    debug_print(f"❌ Failed to fetch player data: {e}")

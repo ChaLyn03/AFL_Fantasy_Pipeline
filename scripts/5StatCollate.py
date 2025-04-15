@@ -1,5 +1,12 @@
 import json
 import sqlite3
+import os
+
+DEBUG = os.getenv("DEBUG", "0") == "1"
+
+def debug_print(*args):
+    if DEBUG:
+        print("DEBUG:", *args)
 
 # --- Load JSON Files ---
 with open("data/raw/3Player.json") as f:
