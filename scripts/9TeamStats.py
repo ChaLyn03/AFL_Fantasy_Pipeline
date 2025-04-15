@@ -9,9 +9,9 @@ import sys
 TEAM_ENDPOINT = "https://fantasy.afl.com.au/afl_classic/api/teams_classic/show_my"
 TRADES_ENDPOINT = "https://fantasy.afl.com.au/afl_classic/api/teams_classic/show_trades"
 
-DERIVATIVE_DB = "8StatAll.db"      # Source database with derivative stats from 7DerivativeStats.py
-TEAM_DB = "10TeamStats.db"         # New database file to be created for team records
-TEAM_CSV = "11TeamStats.csv"       # CSV output file
+DERIVATIVE_DB = "data/processed/8StatAll.db"      # Source database with derivative stats from 7DerivativeStats.py
+TEAM_DB = "data/processed/10TeamStats.db"         # New database file to be created for team records
+TEAM_CSV = "data/processed/11TeamStats.csv"       # CSV output file
 
 headers = {
     "Accept": "application/json, text/plain, */*",

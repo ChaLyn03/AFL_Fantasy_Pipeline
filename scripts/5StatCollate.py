@@ -2,10 +2,10 @@ import json
 import sqlite3
 
 # --- Load JSON Files ---
-with open("3Player.json", "r") as f:
+with open("data/raw/3Player.json") as f:
     players = json.load(f)
 
-with open("4Coach.json", "r") as f:
+with open("data/raw/4Coach.json") as f:
     coaches = json.load(f)
 
 # --- Build dynamic keys ---
@@ -53,7 +53,7 @@ be_pct_rounds = sort_keys(be_pct_rounds)
 coach_transfer_rounds = sort_keys(coach_transfer_rounds)
 
 # Connect to DB
-conn = sqlite3.connect("6StatCollate.db")
+conn = sqlite3.connect("data/interim/6StatCollate.db")
 cur = conn.cursor()
 
 # === Reset tables ===

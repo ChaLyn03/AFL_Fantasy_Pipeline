@@ -14,7 +14,7 @@ try:
     response = requests.get(DATA_URL, headers=HEADERS)
     response.raise_for_status()
     data = response.json()
-    with open(OUTPUT_FILE, "w") as f:
+    with open("data/raw/3Player.json", "w") as f:
         json.dump(data, f, indent=2)
     print(f"✅ Player data saved to {OUTPUT_FILE}")
 except Exception as e:

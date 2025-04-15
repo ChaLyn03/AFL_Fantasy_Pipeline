@@ -1,3 +1,11 @@
 # Stores runtime settings like file paths, constants, or API keys (ideally environment specific)
 # You can keep secrets here but do not commit them
 # Consider using .env and python-dotenv if sensitive
+
+
+RAW_PLAYER_JSON = "data/raw/3Player.json"
+RAW_COACH_JSON = "data/raw/4Coach.json"
+COLLATED_DB = "data/interim/6StatCollate.db"
+DERIVATIVE_DB = "data/processed/8StatAll.db"
+TEAM_DB = "data/processed/10TeamStats.db"
+TEAM_CSV = "data/processed/11TeamStats.csv"

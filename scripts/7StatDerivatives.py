@@ -4,8 +4,8 @@ import os
 import sys
 
 # --- Configuration ---
-SOURCE_DB = "6StatCollate.db"
-DEST_DB = "8StatAll.db"
+SOURCE_DB = "data/interim/6StatCollate.db"
+DEST_DB = "data/processed/8StatAll.db"
 
 # Check that the source database exists
 if not os.path.exists(SOURCE_DB):
@@ -13,13 +13,13 @@ if not os.path.exists(SOURCE_DB):
 
 # --- Copy the fundamental database to create a new one for derivative stats ---
 try:
-    shutil.copyfile(SOURCE_DB, DEST_DB)
+    shutil.copyfile("data/interim/6StatCollate.db", "data/processed/8StatAll.db")
     print(f"Copied {SOURCE_DB} to {DEST_DB}")
 except Exception as e:
     sys.exit(f"Error copying database: {e}")
 
 # --- Connect to the new database ---
-conn = sqlite3.connect(DEST_DB)
+conn = sqlite3.connect("data/processed/8StatAll.db")
 cur = conn.cursor()
 
 def add_column_if_not_exists(table, column, coldef):
