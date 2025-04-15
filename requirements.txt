@@ -3,3 +3,6 @@ charset-normalizer==3.4.1
 idna==3.10
 requests==2.32.3
 urllib3==2.4.0
+
+# Lists all the python packages needed to run the project,
+# is run using "pip install -r requirements.txt"

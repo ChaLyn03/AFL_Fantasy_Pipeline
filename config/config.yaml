@@ -1,0 +1,3 @@
+# Stores runtime settings like file paths, constants, or API keys (ideally environment specific)
+# You can keep secrets here but do not commit them
+# Consider using .env and python-dotenv if sensitive
