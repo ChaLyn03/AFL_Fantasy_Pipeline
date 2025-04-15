@@ -2,7 +2,6 @@ import sqlite3
 import shutil
 import os
 import sys
-import os
 
 DEBUG = os.getenv("DEBUG", "0") == "1"
 
@@ -18,15 +17,15 @@ DEST_DB = "data/processed/8StatAll.db"
 if not os.path.exists(SOURCE_DB):
     sys.exit(f"Source database {SOURCE_DB} does not exist.")
 
-# --- Copy the fundamental database to create a new one for derivative stats ---
+# --- Copy the source DB to create a new enriched version ---
 try:
-    shutil.copyfile("data/interim/6StatCollate.db", "data/processed/8StatAll.db")
+    shutil.copyfile(SOURCE_DB, DEST_DB)
     debug_print(f"Copied {SOURCE_DB} to {DEST_DB}")
 except Exception as e:
     sys.exit(f"Error copying database: {e}")
 
 # --- Connect to the new database ---
-conn = sqlite3.connect("data/processed/8StatAll.db")
+conn = sqlite3.connect(DEST_DB)
 cur = conn.cursor()
 
 def add_column_if_not_exists(table, column, coldef):
@@ -38,18 +37,18 @@ def add_column_if_not_exists(table, column, coldef):
     else:
         debug_print(f"Column {column} already exists in {table}")
 
-# --- Ensure derivative columns exist in the player_coach_combined table ---
+# --- Add derivative columns to player_coach_combined ---
 for col, definition in [
     ("efficiency", "REAL"),
-    ("consistency", "REAL"),
+    ("custom_consistency", "REAL"),
     ("recent_trend", "REAL"),
     ("cost_efficiency", "REAL")
 ]:
     add_column_if_not_exists("player_coach_combined", col, definition)
 
-# --- Update each derivative column separately ---
+# --- Derivative calculations ---
 
-# Update efficiency: total_points per game (guarding against NULL and division by 0)
+# 1. Efficiency = total_points / games_played
 try:
     cur.execute("""
         UPDATE player_coach_combined
@@ -64,23 +63,29 @@ except Exception as e:
     conn.rollback()
     debug_print("Error updating efficiency:", e)
 
-# Update consistency: difference between high_score and low_score
+# 2. Custom consistency = high_score - low_score
 try:
     cur.execute("""
         UPDATE player_coach_combined
-        SET consistency = high_score - low_score
+        SET custom_consistency = CASE
+            WHEN high_score IS NOT NULL AND low_score IS NOT NULL THEN high_score - low_score
+            ELSE NULL
+        END
     """)
     conn.commit()
-    debug_print("Updated consistency in player_coach_combined")
+    debug_print("Updated custom_consistency in player_coach_combined")
 except Exception as e:
     conn.rollback()
-    debug_print("Error updating consistency:", e)
+    debug_print("Error updating custom_consistency:", e)
 
-# Update recent_trend: difference between last_3_avg and avg_points
+# 3. Recent trend = last_3_avg - avg_points
 try:
     cur.execute("""
         UPDATE player_coach_combined
-        SET recent_trend = last_3_avg - avg_points
+        SET recent_trend = CASE
+            WHEN last_3_avg IS NOT NULL AND avg_points IS NOT NULL THEN last_3_avg - avg_points
+            ELSE NULL
+        END
     """)
     conn.commit()
     debug_print("Updated recent_trend in player_coach_combined")
@@ -88,7 +93,7 @@ except Exception as e:
     conn.rollback()
     debug_print("Error updating recent_trend:", e)
 
-# Update cost_efficiency: total_points divided by cost
+# 4. Cost efficiency = total_points / cost
 try:
     cur.execute("""
         UPDATE player_coach_combined
@@ -103,10 +108,9 @@ except Exception as e:
     conn.rollback()
     debug_print("Error updating cost_efficiency:", e)
 
-# --- Ensure derivative column exists in the coach_raw table ---
+# --- Coach projections: proj_efficiency = proj_score / draft_selections ---
 add_column_if_not_exists("coach_raw", "proj_efficiency", "REAL")
 
-# Update proj_efficiency for coach_raw: proj_score divided by draft_selections
 try:
     cur.execute("""
         UPDATE coach_raw
@@ -121,6 +125,6 @@ except Exception as e:
     conn.rollback()
     debug_print("Error updating proj_efficiency:", e)
 
-# --- Close the database connection ---
+# --- Close DB ---
 conn.close()
-debug_print("7DerivativeStats.py completed successfully.")
+debug_print("7StatDerivatives.py completed successfully.")

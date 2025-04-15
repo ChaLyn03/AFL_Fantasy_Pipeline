@@ -43,6 +43,12 @@ def test_values_populated_coach(enriched_db):
     count = cur.fetchone()[0]
     assert count > 0, "proj_efficiency not populated"
 
+def test_custom_consistency_column(enriched_db):
+    cur = enriched_db.cursor()
+    cur.execute("PRAGMA table_info(player_coach_combined)")
+    columns = {row[1] for row in cur.fetchall()}
+    assert "custom_consistency" in columns, "Missing derived 'custom_consistency' column"
+
 def test_efficiency_matches_points_per_game(enriched_db):
     """Sanity check: efficiency should roughly match total_points / games_played"""
     cur = enriched_db.cursor()

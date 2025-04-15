@@ -75,7 +75,7 @@ venv:
 .PHONY: test
 test:
 	@echo "🧪 Running tests with pytest..."
-	pytest tests/
+	.venv/bin/pytest tests/
 	
 .PHONY: e2e-test
 
@@ -85,7 +85,6 @@ e2e-test:
 
 # --- DEBUGGING ---
 
-.PHONY: derive-debug
-derive-debug:
-	DEBUG=1 python scripts/7StatDerivatives.py
-
+.PHONY: all-debug
+all-debug:
+	DEBUG=1 make scrape collate derive team
