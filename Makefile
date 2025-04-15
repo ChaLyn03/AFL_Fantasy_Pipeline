@@ -74,6 +74,5 @@ venv:
 
 .PHONY: test
 test:
-	@echo "🧪 Running tests..."
+	@echo "🧪 Running tests with pytest..."
 	pytest tests/
-

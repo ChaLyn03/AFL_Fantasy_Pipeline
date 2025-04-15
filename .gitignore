@@ -20,3 +20,4 @@ source .venv/bin/activate
 
 # Jupyter
 .ipynb_checkpoints/
+__pycache__/

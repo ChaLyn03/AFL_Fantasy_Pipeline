@@ -1,5 +1,3 @@
-# tests/test_collate.py
-
 import os
 import sqlite3
 import pytest
@@ -20,21 +18,21 @@ def test_tables_exist(collated_db):
     cur = collated_db.cursor()
     cur.execute("SELECT name FROM sqlite_master WHERE type='table'")
     tables = {row[0] for row in cur.fetchall()}
-    expected = {"players", "coaches", "combined"}
+    expected = {"player_raw", "coach_raw", "player_coach_combined"}
     missing = expected - tables
     assert not missing, f"Missing tables: {missing}"
 
-def test_players_table_not_empty(collated_db):
-    """Ensure the players table has data."""
+def test_player_raw_not_empty(collated_db):
+    """Ensure the player_raw table has data."""
     cur = collated_db.cursor()
-    cur.execute("SELECT COUNT(*) FROM players")
+    cur.execute("SELECT COUNT(*) FROM player_raw")
     count = cur.fetchone()[0]
     assert count > 0, "No player data found"
 
-def test_column_existence(collated_db):
-    """Check some key dynamic columns exist."""
+def test_column_existence_in_player_raw(collated_db):
+    """Check some key dynamic columns exist in player_raw."""
     cur = collated_db.cursor()
-    cur.execute("PRAGMA table_info(players)")
+    cur.execute("PRAGMA table_info(player_raw)")
     columns = {row[1] for row in cur.fetchall()}
     required = {"id", "name", "avg_points"}
     missing = required - columns
