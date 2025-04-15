@@ -42,3 +42,17 @@ def test_values_populated_coach(enriched_db):
     cur.execute("SELECT COUNT(*) FROM coach_raw WHERE proj_efficiency IS NOT NULL")
     count = cur.fetchone()[0]
     assert count > 0, "proj_efficiency not populated"
+
+def test_efficiency_matches_points_per_game(enriched_db):
+    """Sanity check: efficiency should roughly match total_points / games_played"""
+    cur = enriched_db.cursor()
+    cur.execute("""
+        SELECT total_points, games_played, efficiency
+        FROM player_coach_combined
+        WHERE games_played > 0 AND total_points IS NOT NULL AND efficiency IS NOT NULL
+        LIMIT 10
+    """)
+    rows = cur.fetchall()
+    for total_points, games_played, efficiency in rows:
+        expected = total_points / games_played
+        assert abs(expected - efficiency) < 0.1, f"Efficiency mismatch: {expected} vs {efficiency}"
