@@ -98,7 +98,10 @@ for trade in trades_result:
         team_member_ids.remove(old_id)
         team_member_ids.add(new_id)
 
+# Deduplicate
+team_member_ids = list(set(team_member_ids))
 print("DEBUG: Final team member IDs after processing trades:", team_member_ids)
+
 team_member_ids = list(team_member_ids)
 
 # --- Step 3. Query the derivative database (8StatAll.db) for these player records ---
@@ -134,7 +137,8 @@ try:
     print("DEBUG: Attached source_db (8StatAll.db) to new database connection.")
     
     # Create table 'team_stats' in TEAM_DB using the schema from source_db.player_coach_combined.
-    cur_team.execute("CREATE TABLE IF NOT EXISTS team_stats AS SELECT * FROM source_db.player_coach_combined WHERE 0")
+    cur_team.execute("DROP TABLE IF EXISTS team_stats")
+    cur_team.execute("CREATE TABLE team_stats AS SELECT * FROM source_db.player_coach_combined WHERE 0")
     conn_team.commit()
     print("DEBUG: Table 'team_stats' created in TEAM_DB using schema from source_db.")
 except Exception as e:
