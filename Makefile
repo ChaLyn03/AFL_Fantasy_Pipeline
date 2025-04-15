@@ -46,8 +46,15 @@ clean:
 
 .PHONY: deep-clean
 deep-clean: clean
-	@echo "🧼 Removing raw scraped JSON files..."
-	rm -f $(RAW_DATA_DIR)/*.json
+	@echo "⚠️  You're about to remove your raw scraped JSON files (data/raw/*.json)."
+	@echo "💥 These are your fundamental files — it’ll suck if you still need them"
+	@read -p "❓ Are you sure you want to continue? (y/N) " confirm && \
+	if [ "$$confirm" = "y" ] || [ "$$confirm" = "Y" ]; then \
+		echo "🧼 Deep cleaning raw files..."; \
+		rm -f $(RAW_DATA_DIR)/*.json; \
+	else \
+		echo "❌ Deep clean cancelled."; \
+	fi
 
 # --- ENVIRONMENT ---
 
