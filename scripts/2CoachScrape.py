@@ -23,6 +23,6 @@ try:
     data = response.json()
     with open("data/raw/4Coach.json", "w") as f:
         json.dump(data, f, indent=2)
-    print(f"✅ Coach data saved to {OUTPUT_FILE}")
+    debug_print(f"✅ Coach data saved to {OUTPUT_FILE}")
 except Exception as e:
-    print(f"❌ Failed to fetch coach data: {e}")
+    debug_print(f"❌ Failed to fetch coach data: {e}")

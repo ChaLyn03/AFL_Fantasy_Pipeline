@@ -237,4 +237,4 @@ cur.execute("CREATE TABLE player_coach_combined AS SELECT * FROM player_raw LEFT
 
 conn.commit()
 conn.close()
-print("✅ All tables created with dynamic rounds and full reset.")
+debug_print("✅ All tables created with dynamic rounds and full reset.")

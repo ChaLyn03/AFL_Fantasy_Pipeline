@@ -175,6 +175,7 @@ except Exception as e:
     sys.exit(f"ERROR: Could not retrieve table schema: {e}")
 
 try:
+    
     with open(TEAM_CSV, mode="w", newline="", encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(columns)
