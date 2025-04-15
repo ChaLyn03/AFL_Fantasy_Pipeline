@@ -1,2 +1,36 @@
-# Defines project metadata, dependencies, build system
-# Usually used in conjunction with poetry, black and modern packaging
+[project]
+name = "afl-fantasy-pipeline"
+version = "0.1.0"
+description = "An end-to-end data pipeline for scraping, processing, and analyzing AFL Fantasy data."
+authors = [
+  { name = "Charles Lynch" }
+]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "requests",
+  "pandas",
+  "numpy"
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+line-length = 100
+exclude = ["data", "notebooks"]
+select = ["E", "F", "B"]
+
+[tool.pytest.ini_options]
+pythonpath = "scripts"
+addopts = "--tb=short --disable-warnings"
