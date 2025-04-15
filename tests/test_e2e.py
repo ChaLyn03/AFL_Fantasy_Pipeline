@@ -10,11 +10,13 @@ CSV_TEAM = "data/processed/11TeamStats.csv"
 # --- Fixture: Run pipeline ---
 @pytest.fixture(scope="module", autouse=True)
 def run_full_pipeline():
+    print("🔁 Running full pipeline for E2E test")
     assert os.system("python scripts/1PlayerScrape.py") == 0
     assert os.system("python scripts/2CoachScrape.py") == 0
     assert os.system("python scripts/5StatCollate.py") == 0
     assert os.system("python scripts/7StatDerivatives.py") == 0
     assert os.system("python scripts/9TeamStats.py") == 0
+
 
 def test_team_db_exists():
     assert os.path.exists(DB_TEAM), "10TeamStats.db missing"
