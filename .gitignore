@@ -1,0 +1,22 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.db
+
+# Data
+data/raw/
+data/interim/
+data/processed/
+
+# Environment
+.env
+.venv/
+*.env
+python3 -m venv .venv
+source .venv/bin/activate
+
+# VSCode
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
