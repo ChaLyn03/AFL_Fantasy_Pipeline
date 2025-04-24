@@ -98,7 +98,7 @@ try:
     cur.execute("""
         UPDATE player_coach_combined
         SET cost_efficiency = CASE
-            WHEN cost IS NOT NULL AND cost > 0 THEN total_points * 1.0 / cost
+            WHEN cost IS NOT NULL AND cost > 0 THEN cost * 1.0 / total_points
             ELSE 0
         END
     """)

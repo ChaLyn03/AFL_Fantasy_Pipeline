@@ -1,0 +1,134 @@
+[
+  {
+    "id": 2,
+    "name": "Ninja Stadium",
+    "short_name": "NS",
+    "timezone": "Australia/Hobart"
+  },
+  {
+    "id": 6,
+    "name": "Adelaide Oval",
+    "short_name": "AO",
+    "timezone": "Australia/Adelaide"
+  },
+  {
+    "id": 9,
+    "name": "Accor Stadium",
+    "short_name": "AS",
+    "timezone": "Australia/Sydney"
+  },
+  {
+    "id": 20,
+    "name": "Gabba",
+    "short_name": "G",
+    "timezone": "Australia/Brisbane"
+  },
+  {
+    "id": 30,
+    "name": "GMHBA Stadium",
+    "short_name": "GS",
+    "timezone": "Australia/Melbourne"
+  },
+  {
+    "id": 40,
+    "name": "MCG",
+    "short_name": "MCG",
+    "timezone": "Australia/Melbourne"
+  },
+  {
+    "id": 43,
+    "name": "ENGIE Stadium",
+    "short_name": "ES",
+    "timezone": "Australia/Sydney"
+  },
+  {
+    "id": 50,
+    "name": "Ikon Park",
+    "short_name": "IP",
+    "timezone": "Australia/Melbourne"
+  },
+  {
+    "id": 60,
+    "name": "SCG",
+    "short_name": "SCG",
+    "timezone": "Australia/Sydney"
+  },
+  {
+    "id": 81,
+    "name": "People First Stadium",
+    "short_name": "PFS",
+    "timezone": "Australia/Brisbane"
+  },
+  {
+    "id": 150,
+    "name": "Manuka Oval",
+    "short_name": "MO",
+    "timezone": "Australia/Canberra"
+  },
+  {
+    "id": 160,
+    "name": "TIO Stadium",
+    "short_name": "TIO",
+    "timezone": "Australia/Darwin"
+  },
+  {
+    "id": 181,
+    "name": "Cazalys Stadium",
+    "short_name": "CS",
+    "timezone": "Australia/Brisbane"
+  },
+  {
+    "id": 190,
+    "name": "Marvel Stadium",
+    "short_name": "MRVL",
+    "timezone": "Australia/Melbourne"
+  },
+  {
+    "id": 200,
+    "name": "University of Tasmania Stadium",
+    "short_name": "UT",
+    "timezone": "Australia/Hobart"
+  },
+  {
+    "id": 313,
+    "name": "Mars Stadium",
+    "short_name": "MARS",
+    "timezone": "Australia/Melbourne"
+  },
+  {
+    "id": 374,
+    "name": "Norwood Oval",
+    "short_name": "NO",
+    "timezone": "Australia/Adelaide"
+  },
+  {
+    "id": 386,
+    "name": "TIO Traeger Park",
+    "short_name": "TP",
+    "timezone": "Australia/Darwin"
+  },
+  {
+    "id": 2125,
+    "name": "Hands Oval",
+    "short_name": "HO",
+    "timezone": "Australia/Perth"
+  },
+  {
+    "id": 2925,
+    "name": "Optus Stadium",
+    "short_name": "OS",
+    "timezone": "Australia/Perth"
+  },
+  {
+    "id": 3805,
+    "name": "Adelaide Hills",
+    "short_name": "AH",
+    "timezone": "Australia/Adelaide"
+  },
+  {
+    "id": 4105,
+    "name": "Barossa Park",
+    "short_name": "BP",
+    "timezone": "Australia/Adelaide"
+  }
+]
